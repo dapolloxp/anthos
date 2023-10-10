@@ -21,7 +21,7 @@ spec:
     - enablePrivateEndpoint: true
       enablePrivateNodes: true
       masterIpv4CidrBlock: 172.16.10.16/28
-      masterGlobalAccessConfig: true
+   #   masterGlobalAccessConfig: true
     masterAuthorizedNetworksConfig:
     - cidrBlocks:
         - cidrBlock: "10.0.0.0/8"
