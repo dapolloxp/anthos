@@ -2,6 +2,8 @@ apiVersion: constraints.gatekeeper.sh/v1beta1
 kind: K8sDenyName
 metadata:
   name: no-policy-violation
+  annotations:
+   configsync.gke.io/cluster-name-selector: aks-cluster,minimal-installation-user-cluster
 spec:
   parameters:
     invalidName: "blue"
