@@ -1,0 +1,27 @@
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  name: require-pod-label
+spec:
+  crd:
+    spec:
+      names:
+        kind: requirepodlabel
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package kubernetes.admission
+
+        deny[msg] {
+            input.review.object.kind == "Pod"
+            input.review.object.metadata.namespace == "blue"
+            not input.review.object.metadata.labels["color"] == "blue"
+            msg := sprintf("Pods in namespace 'blue' must have the 'color=blue' label. Namespace: %v", [input.review.object.metadata.namespace])
+        }
+
+        deny[msg] {
+            input.review.object.kind == "Pod"
+            not input.review.object.metadata.namespace == "blue"
+            msg := sprintf("Pods must be created in the 'blue' namespace. Namespace: %v", [input.review.object.metadata.namespace])
+        }
+
