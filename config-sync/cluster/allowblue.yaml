@@ -1,7 +1,13 @@
-apiVersion: templates.gatekeeper.sh/v1beta1
+apiVersion: templates.gatekeeper.sh/v1
 kind: ConstraintTemplate
 metadata:
   name: require-pod-label
+  annotations:
+    metadata.gatekeeper.sh/title: "Require Blue Label"
+    metadata.gatekeeper.sh/version: 1.0.0
+    description: >-
+      Requires resources to contain slable = blue
+    configsync.gke.io/cluster-name-selector: aks-cluster,minimal-installation-user-cluster
 spec:
   crd:
     spec:

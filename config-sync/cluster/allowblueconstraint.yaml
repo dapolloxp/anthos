@@ -2,7 +2,10 @@ apiVersion: constraints.gatekeeper.sh/v1beta1
 kind: requirepodlabel
 metadata:
   name: require-pod-label
+  annotations:
+   configsync.gke.io/cluster-name-selector: aks-cluster,minimal-installation-user-cluster
 spec:
+  enforcementAction: deny
   match:
     kinds:
       - apiGroups: [""]
